@@ -1,0 +1,81 @@
+@import './styles/variable.css';
+@import './styles/helper.css';
+@import './styles/basic.css';
+
+.avatar{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #eee;
+  box-sizing: border-box;
+}
+.sqAvatar{
+  width: 50px;
+  height: 50px;
+}
+.bigAvatar{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid #eee;
+  box-sizing: border-box;
+}
+input[type=text], input[type=number]{
+  box-sizing: border-box;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  -webkit-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+textarea{
+  width: 100%;
+  padding: 6px 12px;
+  box-sizing: border-box;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  -webkit-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+input,textarea:focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+}
+input[disabled],textarea[disabled] {
+  background: #eee;
+}
+
+input[type=checkbox], input[type=radio]{
+  position: absolute;
+  margin-left: -20px;
+  margin: 4px 0 0;
+  margin-top: 1px\9;
+  line-height: normal;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+button{
+  border:none;
+}
+.btn-sm{
+  min-width: 100px;
+  padding: 5px 8px;
+  text-align: center;
+}
+

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>测试专用</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=0">
+  <meta name="format-detection" content="telephone=no">
+  <style>
+  .btn,button{
+    background: rgb(57, 202, 123);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    min-width: 80px;
+    min-height: 30px;
+  }
+  input{
+    border:none;
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    padding: 5px 8px;
+  }
+  textarea{
+    width:100%;
+    box-sizing: border-box;
+    padding:5px;
+    border:1px solid #ccc;
+  }
+  .mtmd{
+    margin-top: 15px;
+  }
+  .mtlg{
+    margin-top: 20px;
+  }
+  .center{
+    text-align: center;
+  }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>获取token信息</h1>
+    <textarea id="token" rows="4"></textarea>
+    <button class="mtmd copy" data-clipboard-action="copy" data-clipboard-target='#token'>复制</button>
+    <h1>设置token</h1>
+    <input type="text" placeholder="token信息" style="width:200px"  id="tokenInput" />
+    <button  onclick="setAuth()">设置</button>
+
+    <button class='center' >
+        <a href="/"  style="text-decoration:none;color:white">返回首页</a>
+    </button>
+
+    <button onclick="clearCookie()" style="background:red;margin-top:20px">清除登陆信息</button>
+  </div>
+  <script src="/clipboard.min.js"></script>
+  <script>
+    function showToken () {
+      var token = window.localStorage['token'];
+      document.getElementById('token').value= token;
+    }
+    window.onload = function() {
+      showToken()
+    }
+    function setCookie(c_name,value,expiredays){
+      var exdate=new Date()
+      exdate.setDate(exdate.getDate()+expiredays)
+      document.cookie=c_name+ "=" +escape(value)+
+      ((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+    }
+    function clearCookie(){
+      setCookie('token','',-1);
+      window.localStorage['token'] = '';
+      showToken();
+      alert('清除成功！');
+    }
+    function setAuth() {
+      var ip = document.getElementById('tokenInput')
+      var val = ip.value
+      window.localStorage['token'] = val;
+      setCookie('token',val,7);
+      showToken()
+      ip.value = '';
+    }
+
+//     function copyToken() {
+//       if(!window.clipboardData) {
+//         alert('无法自动粘贴，请自己全选复制粘贴');
+//         return
+//       }
+//     　　var t=document.getElementById("token");
+//     　　window.clipboardData.setData('text',t.value);
+// 　　}
+    // init clip board
+    var clipboard = new Clipboard('.copy');
+    clipboard.on('success',function(e){
+      console.info('Action:', e.action);
+      console.info('Text:', e.text);
+      console.info('Trigger:', e.trigger);
+      alert('复制成功！');
+    });
+    clipboard.on('error', function(e) {
+      console.error('Action:', e.action);
+      console.error('Trigger:', e.trigger);
+    });
+  </script>
+</body>
+</html>

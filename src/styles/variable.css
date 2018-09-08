@@ -1,0 +1,66 @@
+:root {
+  /*
+   * Typography
+   * ======================================================================== */
+
+  --font-family-base: 'Segoe UI', 'HelveticaNeue-Light', sans-serif;
+
+  /*
+   * Layout
+   * ======================================================================== */
+
+  --max-content-width: 1000px;
+
+  /*
+   * Media queries breakpoints
+   * ======================================================================== */
+
+  --screen-xs-min: 480px;  /* Extra small screen / phone */
+  --screen-sm-min: 768px;  /* Small screen / tablet */
+  --screen-md-min: 992px;  /* Medium screen / desktop */
+  --screen-lg-min: 1200px; /* Large screen / wide desktop */
+
+  /*
+  * 主题的配色
+  */
+  --c1: #ffffff;
+--c2: #ededed;
+--c3: #d3d3d3;
+--c4: #9c9c9c;
+--c5: #666666;
+--c6: #333333;
+--c7: #1ab394;
+--c8: #ffb400;
+--c9: #ff6474;
+--c10: rgba(0,0,0,0.65);
+--c11: rgba(0,0,0,0.65);
+--c12: rgba(0,0,0,0.5);
+--c13: rgba(0,0,0,0.5);
+
+  /*
+  * 主题的文字大小
+  */
+  --f1: 11px;
+--f2: 13px;
+--f3: 15px;
+--f4: 17px;
+--f5: 20px;
+--r1: 0px;
+--r2: 5px;
+--r3: 14px;
+
+  /*
+  * 主题的圆角
+  */
+  
+
+  /*
+  * 主题的间距
+  */
+  
+--xs:5px;
+--sm:10px;
+--md:15px;
+--lg:20px;
+
+}

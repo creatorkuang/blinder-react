@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=0, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+  <!--
+      manifest.json provides metadata used when your web app is added to the
+      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+    -->
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+  <script src="%PUBLIC_URL%/jweixin-1.2.0.js"></script>
+  <script src="%PUBLIC_URL%/qr.min.js"></script>
+  <title>脸盲助手</title>
+</head>
+
+<body>
+  <noscript>
+    您需要开启JavaScript才能运行这个应用
+  </noscript>
+  <div id="root"></div>
+  <script>
+    function detectWeixinApi(callback) {
+      if (typeof window.WeixinJSBridge == 'undefined' || typeof window.WeixinJSBridge.invoke == 'undefined') {
+        setTimeout(function () {
+          detectWeixinApi(callback);
+        }, 200);
+      } else {
+        callback();
+      }
+    }
+    if (window.location.search.indexOf('isDebug=1') > -1) {
+      window.isDebug = true;
+      // 加载remote script
+      var path = 'http://debug.hui51.cn/target/target-script-min.js#anonymous';
+      var ds = document.createElement('script');
+      ds.src = path;
+      document.documentElement.childNodes[0].appendChild(ds);
+    }
+    var shareInit = function (oj, ok, cancel) {
+      if (!wx) return
+      detectWeixinApi(function () {
+        wx.onMenuShareAppMessage({
+          title: oj.title, // 分享标题
+          desc: oj.desc, // 分享描述
+          link: oj.link, // 分享链接
+          imgUrl: oj.imgUrl, // 分享图标
+          type: 'link', // 分享类型,music、video或link，不填默认为link
+          success: function () {
+            if (ok && typeof ok === 'function') {
+              ok()
+            }
+          },
+          cancel: function () {
+            if (cancel && typeof cancel === 'function') {
+              cancel()
+            }
+          }
+        }),
+        wx.onMenuShareTimeline({
+            title: oj.title, // 分享标题
+            link: oj.link, // 分享链接
+            imgUrl: oj.imgUrl, // 分享图标
+            success: function () {
+              if (ok && typeof ok === 'function') {
+                ok()
+              }
+            },
+            cancel: function () {
+              if (cancel && typeof cancel === 'function') {
+                cancel()
+              }
+            }
+          });
+      })
+    }
+    function isWeChatBroswer() {
+      var ua = navigator.userAgent.toLowerCase();
+      return ua.match(/MicroMessenger/i) && ua.match(/MicroMessenger/i)[0] === 'micromessenger';
+    }
+
+    window.setShare = function (oj, ok, cancel) {
+      if (!isWeChatBroswer) return
+      if (window.initWechat) {
+        shareInit(oj, ok, cancel)
+      } else {
+        if (wx) {
+          wx.ready(function () {
+            shareInit(oj, ok, cancel)
+            window.initWechat = true
+          })
+        }
+      }
+    }
+  </script>
+  <script type='text/javascript'>
+    function httpPost(theUrl, params, callback) { var httpRequest = new XMLHttpRequest(); httpRequest.open("POST", theUrl, true); httpRequest.setRequestHeader("Content-type", "application/json"); httpRequest.onreadystatechange = function () { if (httpRequest.readyState == 4 && httpRequest.status == 200) { var data = httpRequest.responseText; if (callback) { callback(data) } } }; httpRequest.send(JSON.stringify(params)) } var extractOj = function (oj, arr) { var len = arr.length; var out = {}; for (var i = 0; i < len; i++) { out[arr[i]] = oj[arr[i]] } return out }; var uid = localStorage.uid; if (!uid) { uid = "" + new Date().getTime() + "" } var postQuery = { isLoaded: true, startTime: 0, uid: uid, endTime: 0, okLoaded: [], browser: extractOj(navigator, ["appCodeName", "appName", "appVersion", "language", "platform", "product", "productSub", "userAgent", "vendor", "vendorSub"]) }; var loadedUrl = "http://blinder.hui51.cn/api/log"; window.onerror = function (message, url, line) { postQuery["error"] = { message: message, url: url, line: line, href: location.href }; httpPost(loadedUrl, postQuery, function () { console.log("发送错误成功") }); return true };
+  </script>
+</body>
+
+</html>
