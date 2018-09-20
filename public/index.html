@@ -59,7 +59,7 @@
             }
           }
         }),
-        wx.onMenuShareTimeline({
+          wx.onMenuShareTimeline({
             title: oj.title, // 分享标题
             link: oj.link, // 分享链接
             imgUrl: oj.imgUrl, // 分享图标
@@ -95,6 +95,16 @@
       }
     }
   </script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-83803285-6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-83803285-6');
+  </script>
+
   <script type='text/javascript'>
     function httpPost(theUrl, params, callback) { var httpRequest = new XMLHttpRequest(); httpRequest.open("POST", theUrl, true); httpRequest.setRequestHeader("Content-type", "application/json"); httpRequest.onreadystatechange = function () { if (httpRequest.readyState == 4 && httpRequest.status == 200) { var data = httpRequest.responseText; if (callback) { callback(data) } } }; httpRequest.send(JSON.stringify(params)) } var extractOj = function (oj, arr) { var len = arr.length; var out = {}; for (var i = 0; i < len; i++) { out[arr[i]] = oj[arr[i]] } return out }; var uid = localStorage.uid; if (!uid) { uid = "" + new Date().getTime() + "" } var postQuery = { isLoaded: true, startTime: 0, uid: uid, endTime: 0, okLoaded: [], browser: extractOj(navigator, ["appCodeName", "appName", "appVersion", "language", "platform", "product", "productSub", "userAgent", "vendor", "vendorSub"]) }; var loadedUrl = "http://blinder.hui51.cn/api/log"; window.onerror = function (message, url, line) { postQuery["error"] = { message: message, url: url, line: line, href: location.href }; httpPost(loadedUrl, postQuery, function () { console.log("发送错误成功") }); return true };
   </script>

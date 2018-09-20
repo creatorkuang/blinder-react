@@ -115,7 +115,8 @@ class PhotoMark extends Component {
       fixProfile,
       location,
       refetch,
-      markPhoto
+      markPhoto,
+      followMark
     } = this.props;
     if (error) {
       if (error === '您未登录或登录已过期') {
@@ -341,6 +342,7 @@ class PhotoMark extends Component {
                           self.setState({
                             showSend: true
                           })
+                          
                         } else {
                           // 直接发送
                           try {
@@ -362,6 +364,8 @@ class PhotoMark extends Component {
                           }
                         }
                       } else {
+                        // send follow mark 
+                        await followMark();
                         self.setState({
                           showDialog: true
                         })
@@ -637,6 +641,10 @@ export default WithApi(PhotoMark, {
     {
       name: 'base64ToPng',
       uri: ({ match }) => `/photo/${match.params.photoId}/base64ToPng`
+    },
+    {
+      name: 'followMark',
+      uri: ({ match }) => `/photo/${match.params.photoId}/followMark`
     }
   ]
 })
